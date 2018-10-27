@@ -1,0 +1,39 @@
+plugins 
+{
+    id 'java'
+}
+
+ext 
+{
+    _javaVersion = '1.8'
+    _mainClassName = 'Server'
+}
+
+dependencies 
+{
+    
+}
+
+sourceCompatibility = _javaVersion
+targetCompatibility = _javaVersion
+
+repositories 
+{
+    mavenCentral()
+    jcenter()
+}
+
+jar
+{
+    manifest
+    {
+        attributes 'Main-Class': _mainClassName
+    }
+    from 
+    {
+        configurations.compile.collect 
+        {
+            it.isDirectory() ? it : zipTree(it)
+        }
+    }
+}
